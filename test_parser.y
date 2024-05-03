@@ -3,8 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "var.h"
-int nsym = 0;
-struct symtab symtab[NSYMS];
 int yylex();
 void yyerror(const char* msg);
 %}
@@ -45,28 +43,6 @@ expression : expression '+' expression { $$ = $1 + $3; }
 ;
 
 %%
-
-struct symtab * symlook(char *s)
-{
-        int i;
-
-        for (i = 0; i < nsym; ++i) {
-                if (!strcmp(symtab[i].name, s))
-                {
-                        printf("found variable.\n");
-                        return &symtab[i];
-                }
-        }
-
-        if (nsym < NSYMS) {
-                symtab[nsym].name = strdup(s);
-                ++nsym;
-                return &symtab[nsym-1];
-        }
-
-        yyerror("Too many symbols");
-        exit(1);
-}
 
 void yyerror(const char* msg) {
         printf("%s\n",msg);

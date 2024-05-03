@@ -2,15 +2,15 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "var.h"  // 包含符号表结构和常量的定义
 
-struct symtab symtab[NSYMS];  // 定义符号表数组
 int nsym=0;
+struct symtab symtab[NSYMS];  // 定义符号表数组
 
 struct symtab *symlook(char *s) {
     for (int i = 0; i < nsym; ++i) {
         if (!strcmp(symtab[i].name, s)) {  // 检查变量名是否已存在
-            printf("test");
             return &symtab[i];  // 返回存在的变量的地址
         }
     }

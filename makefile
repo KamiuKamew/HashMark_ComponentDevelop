@@ -13,7 +13,7 @@ $(PARSER_C) $(PARSER_H): $(PARSER).y
 $(LEXER_C) : $(LEXER).l
 	flex $<
 
-$(TARGET_EXE) : $(PARSER_C) $(LEXER_C) # attention:here
+$(TARGET_EXE) : $(PARSER_C) $(LEXER_C) var.c # attention:here
 	gcc -o $@ $^
 
 build: $(TARGET_EXE)
